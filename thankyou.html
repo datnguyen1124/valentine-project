@@ -16,8 +16,17 @@
       Your browser does not support the audio element
     </audio>
     <h1>Don't go yet!</h1>
-    <button class="button" onclick="location.href='date.html'">
-      Click me to continue!
-    </button>
+    <button class="button" onclick="saveAndContinue()">
+  Click me to continue!
+</button>
+
+<script>
+  function saveAndContinue() {
+    // Save that she reached this page
+    localStorage.setItem("valentineAnswer", "Yes ❤️");
+    // Go to date.html
+    window.location.href = "date.html";
+  }
+</script>
   </body>
 </html>

@@ -67,8 +67,26 @@
         >
       </div>
     </div>
-    <button class="button" onclick="location.href='activities.html'">
-      Click here to continue!
-    </button>
+   <button class="button" onclick="saveDessert()">
+  Click here to continue!
+</button>
+
+<script>
+  function saveDessert() {
+    const checked = document.querySelectorAll('input[name="dessert"]:checked');
+    if (checked.length === 0) {
+      alert("Please select at least one dessert option 😡");
+      return;
+    }
+    let desserts = [];
+
+    checked.forEach((item) => {
+      desserts.push(item.value);
+    });
+
+    localStorage.setItem("desserts", desserts.join(", "));
+    window.location.href = "activities.html";
+  }
+</script>
   </body>
 </html>

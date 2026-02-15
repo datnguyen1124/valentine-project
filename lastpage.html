@@ -3,11 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Thank You!</title>
     <link rel="stylesheet" href="css/flower.css" />
   </head>
   <body>
-    <div id="thankyou"><b>Thank you for answer all these questions!</b></div>
+    <!-- Thank you message -->
+    <div id="thankyou">
+      <b>Thank you for answering all these questions! 💌</b>
+      <p>I'm sending this to Dat now...</p>
+    </div>
+
+    <!-- Flower animation -->
     <div class="flower">
       <div class="f-wrapper">
         <div class="flower__line"></div>
@@ -19,9 +25,7 @@
           <div class="flower__leaf flower__leaf--5"></div>
           <div class="flower__leaf flower__leaf--6"></div>
           <div class="flower__leaf flower__leaf--7"></div>
-          <div
-            class="flower__leaf flower__leaf--8 flower__fall-down--yellow"
-          ></div>
+          <div class="flower__leaf flower__leaf--8 flower__fall-down--yellow"></div>
         </div>
       </div>
 
@@ -35,9 +39,7 @@
           <div class="flower__leaf flower__leaf--5"></div>
           <div class="flower__leaf flower__leaf--6"></div>
           <div class="flower__leaf flower__leaf--7"></div>
-          <div
-            class="flower__leaf flower__leaf--8 flower__fall-down--pink"
-          ></div>
+          <div class="flower__leaf flower__leaf--8 flower__fall-down--pink"></div>
         </div>
       </div>
 
@@ -51,12 +53,49 @@
           <div class="flower__leaf flower__leaf--5"></div>
           <div class="flower__leaf flower__leaf--6"></div>
           <div class="flower__leaf flower__leaf--7"></div>
-          <div
-            class="flower__leaf flower__leaf--8 flower__fall-down--purple"
-          ></div>
+          <div class="flower__leaf flower__leaf--8 flower__fall-down--purple"></div>
         </div>
       </div>
       <div class="flower__glass"></div>
     </div>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- Sending script -->
+    <script>
+      // Initialize EmailJS
+      emailjs.init("CyVr_OUf1t4fcEBi3");
+
+      function sendFinalData() {
+        // Get all answers from localStorage
+        let valentine = localStorage.getItem("valentineAnswer");
+        let date = localStorage.getItem("selectedDate");
+        let foods = localStorage.getItem("foods");
+        let desserts = localStorage.getItem("desserts");
+        let activities = localStorage.getItem("activities");
+
+        // Prepare EmailJS template parameters
+        let templateParams = {
+          valentine: valentine || "No answer",
+          date: date || "No date selected",
+          foods: foods || "No food selected",
+          desserts: desserts || "No dessert selected",
+          activities: activities || "No activities selected",
+        };
+
+        // Send email
+        emailjs.send("service_2alr98n", "template_yssc898", templateParams)
+          .then(function(response) {
+            alert("Date plan sent successfully! 💌");
+            localStorage.clear();
+          }, function(error) {
+            alert("Oops! Something went wrong. 😢");
+          });
+      }
+
+      // Send automatically when page loads
+      window.onload = sendFinalData;
+    </script>
   </body>
 </html>

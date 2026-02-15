@@ -123,8 +123,29 @@
         >
       </div>
     </div>
-    <button class="button" onclick="location.href='dessert.html'">
-      Click here to continue!
-    </button>
+   <button class="button" onclick="saveFood()">
+  Click here to continue!
+</button>
+
+
+<script>
+  function saveFood() {
+    const checked = document.querySelectorAll('input[name="food"]:checked');
+    if (checked.length === 0) {
+      alert("Please select at least one food option 😡");
+      return;
+    }
+
+    let foods = [];
+
+    checked.forEach((item) => {
+      foods.push(item.value);
+    });
+
+    localStorage.setItem("foods", foods.join(", "));
+    window.location.href = "dessert.html";
+  }
+</script>
+
   </body>
 </html>

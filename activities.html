@@ -16,7 +16,7 @@
             type="checkbox"
             name="activities"
             value="aquarium"
-          />aquarium</label
+          />Aquarium</label
         >
       </div>
       <div class="activity-item">
@@ -80,8 +80,26 @@
         >
       </div>
     </div>
-    <button class="button" onclick="location.href='lastpage.html'">
-      Last page
-    </button>
+    <button class="button" onclick="saveActivities()">
+  Last page
+</button>
+
+<script>
+  function saveActivities() {
+    const checked = document.querySelectorAll('input[name="activities"]:checked');
+    if (checked.length === 0) {
+      alert("Please select at least one option 😡");
+      return;
+    }
+    let activities = [];
+
+    checked.forEach((item) => {
+      activities.push(item.value);
+    });
+
+    localStorage.setItem("activities", activities.join(", "));
+    window.location.href = "lastpage.html";
+  }
+</script>
   </body>
 </html>
